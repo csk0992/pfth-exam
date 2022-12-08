@@ -215,4 +215,180 @@ The full script is in the `assignment3.py` file. It includes the classes written
 Were I to keep elaborating on this project, future expansions on the script could include relating it to actual registration by for example taking the maximum number of teams for a challenge into account, or adding a scorekeeping system across a given season.
 
 # Assignment 4
+## Custom Plotting Function
+### By Carl-Emil Schjøtt Kramshøj, Programming for the Humanities, 2022 
+- Group submission: no
+- Group members: none 
+### Introduction
+Write a function that can take a (time) series and a filename as input and generates a series visualization that is stored under the filename.
 
+To solve this task in relation to the given .csv files with patient data, my function needs to include the following:
+
+- two variables corresponding to the name of the series and the filename to save it under
+- the ability to load a given series into a numpy array
+- passing the array to a plot to create the series visualization
+- saving the plot with the second variable as filename, and closing it
+
+### Outcome
+These considerations have been implemented into the attached `assignment4a.py` file, along with instantiating the function at last to show it in use. The following plot is the output.
+
+![assignmentVisual](https://user-images.githubusercontent.com/120116455/206572465-3d1cedc9-3c02-42b0-9d78-e54e1b9bf2ea.png)
+
+## To Stack Or Not To Stack
+### By Carl-Emil Schjøtt Kramshøj, Programming for the Humanities, 2022 
+- Group submission: no
+- Group members: none 
+### Introduction
+In this problem you have to make two plots from at least eight series objects (rows) in one data file, e.g., series-01.csv. In the first plot, you have to stack the eight series in one plot, that is, they shold all be in the same plot window (i.e., stacked on top of each other). In the second plot, each series object should have its own subplot (i.e., a total of eight 'unstacked' subplots). Discuss the advantage/disadvantage of stacked vs unstacked plotting of series data.
+
+To solve this task, my code needs to do the following:
+
+- read a csv file into a dataframe and pick apart the first 8 rows in the file into separate series
+
+- add a separate list to represent the time period for the dataset, which can serve as the x-axis for all subsequent plots in the script
+
+- create a figure in which all 8 series subplots are visualized in the same ax object
+
+- save it and close it
+
+- create another figure in which the 8 series are visualized on separate ax objects
+
+- save it and close it
+
+### Outcome
+For simplicity and ease of viewing, the plots used to visualize this task will be line graphs instead. The stacked plot will also have all 8 lines labeled and the `plt.legend()` function used to create an overview, and titles will be set for each object in the array of separated subplots. Labels will be added to the y- and x-axis of both the stacked and the separated plots, but the separated plots will only visualize the axis labels on the outer rim of the figure while also managing the space between plots using `fig.tight_layout().`
+
+These considerations have been implemented in the attached script `assignment4c.py`, and the results are as follows:
+
+Separate:
+
+![assignmentVisualSeparate](https://user-images.githubusercontent.com/120116455/206573389-9a7a29cf-4f75-4b52-b2b3-70f943b81d31.png)
+
+Stacked:
+
+![assignmentVisualStacked](https://user-images.githubusercontent.com/120116455/206573433-6042a213-ee70-4dad-9370-02dcb8b9d540.png)
+
+### Discussion
+See the assignment file.
+
+## Pairplot of World Happiness Survey
+### By Carl-Emil Schjøtt Kramshøj, Programming for the Humanities, 2022 
+- Group submission: no
+- Group members: none 
+### Introduction
+Read the following columns from world-happiness-report-2021.dat here into a pandas dataframe:
+
+- Regional indicator
+
+- Ladder score
+
+- Logged GDP per capita
+
+- Healthy life expectancy
+
+- Freedom to make life choices
+
+- Generosity
+
+- Perceptions of corruption
+
+Extract the data for two regions using the Regional indicator column from the dataframe and create a pairplot using seaborn that compares the two regions. 
+
+To accomplish this, my code needs to do the following:
+
+- read specific columns from the given data into a pandas dataframe
+
+- filter the data so I end up with only the rows within those columns that correspond to two given values in the Regional indicator column, as those designate the region the data in each row comes from
+
+- create a pairplot that takes the filtered data and compares the two chosen regions across the other six attributes
+
+The attached `assignment4d.py` show these criteria implemented. Pairplot layout and visual clarity were also taken into account by adjusting size, titles, color, and space between subplots. This was the result:
+
+![attributes_happy](https://user-images.githubusercontent.com/120116455/206577424-40ff98ab-9fbf-44d9-94bd-e9a8afbdb637.png)
+
+# Assignment 5
+## Binary Classification
+### By Carl-Emil Schjøtt Kramshøj, Programming for the Humanities, 2022 
+- Group submission: no
+- Group members: none 
+### Introduction
+Train a binary (two-label) Naive Bayes classifier that predicts two classes (e.g., virgo and pisces) of the sign variable from the horoscope content of horoscope. Knowing that the baseline (Zero Rate) accuracy is approximately 50%, discuss the performance (accuracy and confusion matrix) of your classifier.
+
+In your submission, please discuss what your results mean for the genre of horoscopes (what can we learn about horoscopes from the study).
+
+My script requires the following to accomplish the task:
+
+- two horoscopes’ worth of clean text data extracted from the dataset
+
+- corpus of text vectorized using raw word counts
+
+- model data extracted from there to be split into training and testing data
+
+- Naive Bayes classifier trained on the training data
+
+- Confusion matrix computed and presented
+
+- Classification accuracy computed
+
+- x-fold cross validation ran on the model data and accuracy distribution presented in a plot for visualization 
+
+### Outcome
+- Considerations regarding methods are written in `assignment5a.py`, which also contains the code to solve this task.
+### Discussion
+A plot for the confusion matrix was added for the sake of additional visual clarity:
+![horo1cm](https://user-images.githubusercontent.com/120116455/206581217-d714fa33-e61c-46fc-8f00-a32ba5c69746.png)
+
+Additionally, cross validation was chosen to be done tenfold, and the following histogram was created from executing the script and saving the accuracy distribution of the cross validation:
+![horoAccDist](https://user-images.githubusercontent.com/120116455/206581240-7a72a938-6160-48ec-aa59-9080fa082dca.png)
+
+The multinomial NB algorithm predicts the tag for a piece of text based on highest probability out of all tags in a given sample. This makes it ideal for Natural Language Processing tasks but also gives it a definitive margin of error. Given that my script uses a binary classifier, the baseline accuracy for the two possible tags would be 50/50, truly impartially random chance. The script’s output confusion matrix and relative accuracy being so close to 50% implies a level of arbitrariness and lack of direct correlation that suits my colloquial understanding of written horoscopes.
+
+## Effects of preprocessing
+### By Carl-Emil Schjøtt Kramshøj, Programming for the Humanities, 2022 
+- Group submission: no
+- Group members: none 
+### Introduction
+Preprocessing your natural language data before training a classifier can improve performance considerably. Look at the documentation for the `CountVectorizer()` function and use some of the parameters to preprocess your horoscope data. Then train two binary classifiers and discuss one with and one without preprocessing and compare the performance.
+
+To solve this task, my script requires the following:
+
+- all the same parameters as described for the Binary Processing task
+
+- except done twice, and on the second time around the CountVectorizer() function must be based not on raw word count, but instead on altered parameters to preprocess data
+
+- the ability to compare the preprocessed and non-preprocessed outputs
+
+### Outcome
+- Considerations regarding methods are written in `assignment5b.py` and `assignment5b_prep.py`, which also contain the code to solve this task.
+### Discussion
+Executing 5b, the script with no preprocessing, resulted in these plots:
+
+![horo2cmNoPrep](https://user-images.githubusercontent.com/120116455/206582444-10679000-8aea-4a2b-865d-174f6cd42910.png)
+
+![horoNoPrep](https://user-images.githubusercontent.com/120116455/206582469-d02c52cb-ea1d-499f-848f-7154299bed14.png)
+
+A slightly higher accuracy can be viewed in both plots, but this is still a script based on the same dataset as task 1, and there is no immediate pattern to be found here either.
+
+As for the script attached as `assignment5b_prep.py`, the `CountVectorizer()` function was altered to ignore document terms with a frequency above 0.9 and below 0.5, as well as to filter the corpus based on scikitlearn’s list of english stopwords, with the intention of concentrating the multinomial NB algorithm’s area of focus.
+
+This resulted in the following plots:
+
+![horo2cmPrep](https://user-images.githubusercontent.com/120116455/206582586-cd1e8747-2b84-4bef-8cfd-c7301456abd6.png)
+
+![horoPrep](https://user-images.githubusercontent.com/120116455/206582607-e686a86e-4957-43c4-961e-92cd3f0560fd.png)
+
+These visualizations leave the same impression of arbitrariness as the prior ones, and to emphasize that, they’re even showing a slightly lower accuracy than the script written exactly the same except with no preprocessing.
+
+Since both scripts are written to print out multiple statements relating to the process of using the NB classifier, an optional extra line of code has also been added to the end of `assignment5b.py`, turned off by triple digits, that would open and execute `assignment5b_prep.py` if the digits are removed, for the sake of having the text output side by side for easier comparison.
+
+Here are a few screenshots of this combined text output from different instances of executing the script:
+
+![image](https://user-images.githubusercontent.com/120116455/206583286-611d5023-c1dc-434f-8484-319a48e41ddd.png)
+
+The task description mentions how preprocessing your text data is meant to significantly improve performance, and I do follow the theory behind it as mentioned, that concentrating the corpus that you train and test your algorithm on to the most central and meaningful terms would increase its ability to predict the distribution of said terms.
+With that in mind, I am inclined to believe that repeat instances of executing the two scripts show no correlation between accuracy and performance, and preprocessing, is a consequence of the arbitrary nature of written horoscopes, as discussed in task 1. There is no clear link between which script has the higher relative accuracy and which script’s 1-fold to 10-fold accuracy is highest either, and every instance only results in an accuracy slightly higher than the expected Zero Rate for this binary classifier. 
+Repeating this task on larger datasets before drawing definitive conclusions would be ideal, especially with my use of the train and test data split, but all findings while doing this assignment corroborates the idea that there is no relationship between horoscopes and descriptive terms.
+
+# Individual Assignment
+### By Carl-Emil Schjøtt Kramshøj, Programming for the Humanities, 2022 
+### Introduction
