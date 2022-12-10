@@ -157,16 +157,20 @@ Considerations regarding methods are written in `assignment2b.py,` which also co
 Code output is:
 
 Words in top 200 for Virgo not present in Taurus and Pisces:
+
 ['effort', 'less', 'never', 'everything', 'also', 'off', 'matters', 'year']
 
  
 Words in top 200 for Taurus not present in Pisces and Virgo:
+
 ['But', 'warn', 'bad', 'both', 'Taurus', 'positive', 'point', 'makes', 'energy', 'far']
 
  
 Words in top 200 for Pisces not present in Virgo and Taurus:
+
 ['through', 'ways', 'nothing', 're', 'Pisces', 'away', 'little', 'changes', 'act', 'every', 'planet', 'why', 'which', 'full']`
  
+
 If I were to pick out one word that seems the most charged with meaning for each list, it would be “effort”, “warn”, and “act”.
 I think I would personally have desired a larger data output if I were to attempt to validate the answers I got, so perhaps horoscopes from a greater time period would be ideal.
 
@@ -376,8 +380,7 @@ Additionally, cross validation was chosen to be done tenfold, and the following 
 The multinomial NB algorithm predicts the tag for a piece of text based on highest probability out of all tags in a given sample. This makes it ideal for Natural Language Processing tasks but also gives it a definitive margin of error. Given that my script uses a binary classifier, the baseline accuracy for the two possible tags would be 50/50, truly impartially random chance. The script’s output confusion matrix and relative accuracy being so close to 50% implies a level of arbitrariness and lack of direct correlation that suits my colloquial understanding of written horoscopes.
 
 ## Effects of preprocessing
-### By Carl-Emil Schjøtt Kramshøj, Programming for the Humanities, 2022
-
+By Carl-Emil Schjøtt Kramshøj, Programming for the Humanities, 2022
 - Group submission: no
 - Group members: none
 
@@ -424,11 +427,46 @@ Here are a few screenshots of this combined text output from different instances
 The task description mentions how preprocessing your text data is meant to significantly improve performance, and I do follow the theory behind it as mentioned, that concentrating the corpus that you train and test your algorithm on to the most central and meaningful terms would increase its ability to predict the distribution of said terms. With that in mind, I am inclined to believe that repeat instances of executing the two scripts show no correlation between accuracy and performance, and preprocessing, is a consequence of the arbitrary nature of written horoscopes, as discussed in task 1. There is no clear link between which script has the higher relative accuracy and which script’s 1-fold to 10-fold accuracy is highest either, and every instance only results in an accuracy slightly higher than the expected Zero Rate for this binary classifier. Repeating this task on larger datasets before drawing definitive conclusions would be ideal, especially with my use of the train and test data split, but all findings while doing this assignment corroborates the idea that there is no relationship between horoscopes and descriptive terms.
 
 # Individual Assignment
-## By Carl-Emil Schjøtt Kramshøj, Programming for the Humanities, 2022
+By Carl-Emil Schjøtt Kramshøj, Programming for the Humanities, 2022
 ### Introduction
+In my major Medievidenskab, a common task is to analyze datasets containing lots of tweets. Often the tweets need to be codified and then sorted based on said codes, usually depending on the text itself of each tweet.
 
+As such, I want to write a script that creates objects that can take a .csv file with what I am choosing to call a binary column, which is a column where the rows within the desired semantic code all contain the same value and the rest of the rows either contain one specific other value, or where the intended codifying of the dataset allows you to isolate one semantic code and put every other tweet in a secondary category regardless of value. 
+The script should write each row into one of two new .csv files depending on which value in the binary column that said row possesses.
 
+In the chosen and attached example `disastertweets.csv`, it's the column `_golden` which writes either "TRUE" or "FALSE" depending on whether the text of the tweet is related to actual natural disasters and similar events, or if it is simply using similar language but in reality about something else.
 
+In order to highlight the similarities and differences between the full context of these specific tweets that have keywords in common but exist in two distinctly separate semantic fields, I also wish for the `main()` function to make an object of the disaster tweets dataset, and once split make and save wordclouds of the two new files.
+
+To accomplish all of this, my script needs to include the following:
+
+- creating a class that can take the name of the original file as well as two new filenames to serve as destinations, and finally the title of the binary column
+
+- creating a function for said class that will read the original file into a dataframe
+
+- Said function will create a dataframe of all rows where the binary column contains the same value as a given row, to gather all the identical values
+
+- and create another dataframe for all rows that do not fit the first dataframe
+
+- putting the example dataset into this class and call the function as part of main()
+
+- putting the two output dataframes into wordclouds 
+
+### Outcome
+
+Considerations regarding methods are written in `assignmentIndividual.py`, which also contains the code to solve this task.
   
+### Discussion
 
+This wordcloud contains the tweets about actual disasters:
 
+![DTwordcloudTrue](https://user-images.githubusercontent.com/120116455/206878440-cbf9e3ec-14c1-4309-a62e-84d7408b4d52.png)
+
+This wordcloud contains the tweets using similar words but not about disasters:
+
+![DTwordcloudFalse](https://user-images.githubusercontent.com/120116455/206878449-2d96f421-b71d-4f3d-9a11-6c0650a616a5.png)
+
+The second wordcloud as expected contains some words pertaining to disasters, but is generally far less cohesive than the first one. Thanks to the script,
+a clear visual of the importance of codifying and dividing datasets in my studies is achieved.
+
+Also, the class and function worked as intended, and will be carried forward for my future research, especially since it is written to work based on binary codifying of the column, the column actually just having two values is not a necessity for the script to be useful.
